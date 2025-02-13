@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج إدخال البيانات</title>
+    <title> استبيان لكلية ادارة المشافي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -122,13 +122,13 @@
         <div id="step1" class="step active">
             <h2>الخطوة الأولى: إدخال المعلومات الأساسية</h2>
 
-            <label for="fullName">الاسم الثلاثي:</label>
+            <label for="fullName">الاسم الثلاث للطالب:</label>
             <input type="text" id="fullName" name="entry.1882529103" required>
 
-            <label for="nationalId">رقم الطالب:</label>
+            <label for="nationalId">الرقم الجامعي للطالب:</label>
             <input type="text" id="nationalId" name="entry.1216100525" required>
 
-            <label for="names">اختيار الأسماء:</label>
+            <label for="names">اسماء الدكاترة:</label>
             <select id="names" name="names" multiple required>
                <option value="د. حسين ابراهيم" data-entry="109389468">د. حسين ابراهيم</option>
 <option value="د. علي ابراهيم" data-entry="1329756110">د. علي ابراهيم</option>
@@ -151,7 +151,7 @@
 
         <!-- الخطوة الثانية -->
         <div id="step2" class="step">
-            <h2>الخطوة الثانية: إدخال النصوص للأسماء المختارة</h2>
+            <h2> الخطوة الثانية: إدخال الملاحظات </h2>
             <div id="textEntries"></div>
 
             <button type="button" onclick="prevStep()">السابق</button>
