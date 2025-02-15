@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Dentistry Student</title>
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom CSS for iOS design -->
+  <style>
+
+
+
+ .dropdown {
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border: 1px solid #4133B7;
+            border-radius: 8px;
+            background-color: white;
+            color: #4133B7;
+            font-family: 'Cairo', sans-serif;
+
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Cairo', sans-serif;
+
+        }
+
+        .button-container button {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px solid #4133B7;
+            border-radius: 5px;
+            background-color: transparent;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+
+        }
+
+        .button-container button:hover {
+            background-color: #4133B7;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap");
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+:root {
+  --c-white: #fff;
+  --c-black: #000;
+  --c-ash: #eaeef6;
+  --c-charcoal: #a0a0a0;
+  --c-void: #141b22;
+  --c-fair-pink: #FFEDEC;
+  --c-apricot: #FBC8BE;
+  --c-coffee: #754D42;
+  --c-del-rio: #917072;
+  --c-java: #1FCAC5;
+  --c-titan-white: #f1eeff;
+  --c-cold-purple: #a69fd6;
+  --c-indigo: #6558d3;
+  --c-governor: #4133B7;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 100%;
+  background-color: var(--c-ash);
+  user-select: none; /* For most modern browsers */
+            -webkit-user-select: none; /* For Chrome, Safari, and Opera */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; 
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.5rem;
+  width: 90%;
+  max-width: 1000px;
+  margin: 10vh auto;
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+
+}
+
+.card {
+  border-radius: 16px;
+  box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+  max-width: 300px;
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+
+
+}
+
+.information {
+  background-color: var(--c-white);
+  padding: 1.5rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .tag {
+  display: inline-block;
+  background-color: var(--c-titan-white);
+  color: var(--c-indigo);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.5em 0.75em;
+  line-height: 1;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: 'Cairo', sans-serif;
+
+
+}
+.information .tag + * {
+  margin-top: 1rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .title {
+  font-size: 1.5rem;
+  color: var(--c-void);
+  line-height: 1.25;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .title + * {
+  margin-top: 1rem;
+  font-size: 10px;
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .info {
+  color: var(--c-charcoal);
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .info + * {
+  margin-top: 1.25rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.span{
+  direction: rtl;
+  animation-direction: alternate-reverse;
+
+}
+.information .button {
+  font-family: 'Cairo', sans-serif;
+  line-height: 1;
+  background-color: var(--c-white);
+  border: 2px solid var(--c-indigo);
+  color: var(--c-indigo);
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.information .button:hover, .information .button:focus {
+  background-color: var(--c-indigo);
+  font-family: 'Cairo', sans-serif;
+
+  color: var(--c-white);
+}
+.information .details {
+  display: flex;
+  font-family: 'Cairo', sans-serif;
+
+  gap: 1rem;
+}
+.information .details div {
+  padding: 0.75em 1em;
+  background-color: var(--c-titan-white);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.125em;
+  font-family: 'Cairo', sans-serif;
+
+  flex-basis: 50%;
+}
+.information .details dt {
+  font-size: 0.875rem;
+  color: var(--c-cold-purple);
+  font-family: 'Cairo', sans-serif;
+
+}
+.information .details dd {
+  color: var(--c-indigo);
+  font-weight: 600;
+  font-size: 1.25rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+
+.plan {
+  padding: 10px;
+  background-color: var(--c-white);
+  font-family: 'Cairo', sans-serif;
+
+  color: var(--c-del-rio);
+}
+.plan strong {
+  font-weight: 600;
+  color: var(--c-coffee);
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .inner {
+  padding: 20px;
+  padding-top: 40px;
+  background-color: var(--c-fair-pink);
+  font-family: 'Cairo', sans-serif;
+
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.plan .pricing {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--c-apricot);
+  border-radius: 99em 0 0 99em;
+  display: flex;
+  align-items: center;
+  padding: 0.625em 0.75em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--c-coffee);
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .pricing small {
+  color: var(--c-del-rio);
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--c-coffee);
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .title + * {
+  margin-top: 0.75rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .info + * {
+  margin-top: 1rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features {
+  display: flex;
+  font-family: 'Cairo', sans-serif;
+
+  flex-direction: column;
+}
+.plan .features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features li + * {
+  margin-top: 0.75rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features .icon {
+  background-color: var(--c-java);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-white);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features .icon svg {
+  width: 14px;
+  height: 14px;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan .features + * {
+  margin-top: 1.25rem;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan button {
+  font: inherit;
+  background-color: var(--c-indigo);
+  border-radius: 6px;
+  color: var(--c-white);
+  font-weight: 500;
+  font-size: 1.125rem;
+  width: 100%;
+  border: 0;
+  padding: 1em;
+  font-family: 'Cairo', sans-serif;
+
+}
+.plan button:hover, .plan button:focus {
+  background-color: var(--c-governor);
+  font-family: 'Cairo', sans-serif;
+
+}
+    .swal2-popup {
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      border-radius: 10px;
+      background-color: #f3f3f3;
+      color: #000;
+      width: 80%; /* Adjust width as needed */
+    }
+    .swal2-title {
+      font-family: 'Cairo', sans-serif;
+
+      font-weight: bold;
+      font-size: 20px;
+      color: #4133B7; /* Blue color for title */
+    }
+    .swal2-content {
+      font-size: 16px;
+      color: #333;
+      font-family: 'Cairo', sans-serif;
+
+    }
+    .swal2-actions {
+      display: flex;
+      flex-direction: column; /* Display actions in column */
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      font-family: 'Cairo', sans-serif;
+
+    }
+    .swal2-cancel {
+      background-color: #e5e5ea;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 100%; /* Make cancel button full width */
+      font-family: 'Cairo', sans-serif;
+
+    }
+    .swal2-confirm {
+      background-color: #4133B7;
+      font-family: 'Cairo', sans-serif;
+
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      width: 100%; /* Make confirm button full width */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+        /* إخفاء العنصر بشكل افتراضي */
+        #p12card {
+            display: none;
+        }
+
+
+
+
+  </style>
+</head>
+<body>
+  <h2>Welcome Dentistry Student</h2>
+  <div class="cards">
+
+
+
+
+
+
+
+    <article class="information card" id="p2card">
+      <span class="tag">p1</span>
+      <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+      <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+      <p id="description4">وصف الصفحة هنا</p>
+      <button id="dropdownButton4" class="button" onclick="showOptions('description4', 'dropdownButton4')">
+          <span>معرفة المزيد</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+          </svg>
+      </button>
+  </article>
+
+  <script>
+      // Function to check localStorage and display or hide the element
+      function checkVisibility() {
+          // Get the value of 'p4' from localStorage
+          var p2Value = localStorage.getItem('p2');
+          
+          // Get the element to show/hide
+          var element = document.getElementById('p2card');
+          
+          // Check if p4Value is "true"
+          if (p2Value === 'true') {
+              // Show the element
+              element.style.display = 'block';
+          }
+      }
+
+      // Run the function on page load
+      window.onload = checkVisibility;
+  </script>
+
+
+
+
+
+<article class="information card" id="p10Card1">
+  <span class="tag">نشط</span>
+  <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+  <!-- <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p> -->
+  <p id="description1">وصف الصفحة هنا</p>
+  <button id="dropdownButton1" class="button" onclick="showOptions('description1', 'dropdownButton1')">
+      <span>معرفة المزيد</span>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+          <path d="M0 0h24v24H0V0z" fill="none"/>
+          <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+      </svg>
+  </button>
+</article>
+
+<article class="information card" id="p10Card2">
+  <span class="tag">نشط</span>
+  <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+  <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+  <p id="description2">وصف الصفحة هنا</p>
+  <button id="dropdownButton2" class="button" onclick="showOptions('description2', 'dropdownButton2')">
+      <span>معرفة المزيد</span>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+          <path d="M0 0h24v24H0V0z" fill="none"/>
+          <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+      </svg>
+  </button>
+</article>
+
+<article class="information card" id="p10Card3">
+  <span class="tag">نشط</span>
+  <h2 class="title">علم الأحياء الدقيقة</h2>
+  <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+  <p id="description3">وصف الصفحة هنا</p>
+  <button id="dropdownButton3" class="button" onclick="showOptions('description3', 'dropdownButton3')">
+      <span>معرفة المزيد</span>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+          <path d="M0 0h24v24H0V0z" fill="none"/>
+          <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+      </svg>
+  </button>
+</article>
+
+<script>
+  const days = ['السبت', 'الأحد 15/3/2024', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  let selectedDays = [];
+
+  function showOptions(descriptionId, buttonId) {
+      let html = '<div class="button-container">';
+      days.forEach(day => {
+          if (!selectedDays.includes(day)) {
+              html += `<button id="${day}-${descriptionId}" onclick="selectOption('${day}', '${descriptionId}', '${buttonId}')">${day}</button>`;
+          }
+      });
+      html += '</div>';
+
+      Swal.fire({
+          title: 'اختر يوماً',
+          html: html,
+          showConfirmButton: false,
+          focusConfirm: false
+      });
+  }
+
+  function selectOption(day, descriptionId, buttonId) {
+      Swal.fire({
+          title: 'تم اختيار:',
+          text: day,
+          icon: 'info',
+          showCancelButton: true,
+          confirmButtonText: 'تأكيد',
+          cancelButtonText: 'إعادة الاختيار',
+          reverseButtons: true
+      }).then((result) => {
+          if (result.isConfirmed) {
+              Swal.fire({
+                  title: 'تأكيد',
+                  text: 'هل أنت متأكد أنك تريد المتابعة؟',
+                  icon: 'question',
+                  showCancelButton: true,
+                  confirmButtonText: 'نعم',
+                  cancelButtonText: 'لا',
+                  reverseButtons: true
+              }).then((confirmation) => {
+                  if (confirmation.isConfirmed) {
+                      Swal.fire('نجاح', 'تم تأكيد اختيارك!', 'success').then(() => {
+                          document.getElementById(descriptionId).innerText = 'اليوم المختار: ' + day;
+                          document.getElementById(buttonId).style.display = 'none';
+                          selectedDays.push(day);
+                      });
+                  } else {
+                      showOptions(descriptionId, buttonId);
+                  }
+              });
+          } else {
+              showOptions(descriptionId, buttonId);
+          }
+      });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<h1>المستوى الأول</h1>
+
+<div class="cards">
+
+  <article class="information card" id="p11Card1">
+      <span class="tag">نشط</span>
+      <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+      <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+      <p id="وصف4">وصف الصفحة هنا</p>
+      <button id="زرالقائمة4" class="button" onclick="عرضخيارات('وصف4', 'زرالقائمة4')">
+          <span>معرفة المزيد</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+          </svg>
+      </button>
+  </article>
+
+  <article class="information card" id="p10Card1">
+      <span class="tag">نشط</span>
+      <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+      <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+      <p id="وصف1">وصف الصفحة هنا</p>
+      <button id="زرالقائمة1" class="button" onclick="عرضخيارات('وصف1', 'زرالقائمة1')">
+          <span>معرفة المزيد</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+          </svg>
+      </button>
+  </article>
+
+  <article class="information card" id="p10Card2">
+      <span class="tag">نشط</span>
+      <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+      <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+      <p id="وصف2">وصف الصفحة هنا</p>
+      <button id="زرالقائمة2" class="button" onclick="عرضخيارات('وصف2', 'زرالقائمة2')">
+          <span>معرفة المزيد</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+          </svg>
+      </button>
+  </article>
+
+  <article class="information card" id="p10Card3">
+      <span class="tag">3 ساعات</span>
+      <h2 class="title">علم الأحياء الدقيقة</h2>
+      <!-- <p class="info">3 ساعات معتمدة</p> -->
+      <p id="وصف3"></p>
+      <button id="زرالقائمة3" class="button" onclick="عرضخيارات('وصف3', 'زرالقائمة3')">
+          <span>معرفة المزيد</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M16.01 11H4v2h12.01v3L20 12ل-3.99-4v3z" fill="currentColor"/>
+          </svg>
+      </button>
+  </article>
+
+  <script>
+      const ايام = ['السبت', 'الأحد 15/3/2024', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+      let اياممختارة = [];
+
+      function عرضخيارات(معرفالوصف, معرفالزر) {
+          let html = '<div class="button-container">';
+          ايام.forEach(day => {
+              if (!اياممختارة.includes(day)) {
+                  html += `<button id="${day}-${معرفالوصف}" onclick="اخترخيار('${day}', '${معرفالوصف}', '${معرفالزر}')">${day}</button>`;
+              }
+          });
+          html += '</div>';
+
+          Swal.fire({
+              title: 'اختر يوماً',
+              html: html,
+              showConfirmButton: false,
+              focusConfirm: false
+          });
+      }
+
+      function اخترخيار(day, معرفالوصف, معرفالزر) {
+          Swal.fire({
+              title: 'تم اختيار:',
+              text: day,
+              icon: 'info',
+              showCancelButton: true,
+              confirmButtonText: 'تأكيد',
+              cancelButtonText: 'إعادة الاختيار',
+              reverseButtons: true
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  Swal.fire({
+                      title: 'تأكيد',
+                      text: 'هل أنت متأكد أنك تريد المتابعة؟',
+                      icon: 'question',
+                      showCancelButton: true,
+                      confirmButtonText: 'نعم',
+                      cancelButtonText: 'لا',
+                      reverseButtons: true
+                  }).then((confirmation) => {
+                      if (confirmation.isConfirmed) {
+                          Swal.fire('نجاح', 'تم تأكيد اختيارك!', 'success').then(() => {
+                              document.getElementById(معرفالوصف).innerText = 'اليوم المختار: ' + day;
+                              document.getElementById(معرفالزر).style.display = 'none';
+                              اياممختارة.push(day);
+                          });
+                      } else {
+                          عرضخيارات(معرفالوصف, معرفالزر);
+                      }
+                  });
+              } else {
+                  عرضخيارات(معرفالوصف, معرفالزر);
+              }
+          });
+      }
+  </script>
+  </div>
+
+
+
+
+  <h2>Welcome Dentistry Student</h2>
+
+
+  <div class="cards">
+    <article class="information card" id="ayham">
+      <span class="tag">نشط</span>
+      <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+      <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+      <p id="النص4">وصف الصفحة هنا</p>
+      <button id="المفتاح4" class="button" onclick="عرضاختيارات('النص4', 'المفتاح4')">
+          <span>معرفة المزيد</span>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor"/>
+          </svg>
+      </button>
+  </article>
+  
+  <script>
+      // التحقق من قيمة معينة في localStorage عند تحميل الصفحة
+      document.addEventListener('DOMContentLoaded', function() {
+          var isVisible = localStorage.getItem('articleVisible');
+          var article = document.getElementById('ayham');
+  
+          // إظهار أو إخفاء العنصر بناءً على القيمة
+          if (isVisible !== 'true') {
+              article.style.display = 'none';
+          }
+      });
+  
+      // مثال على دالة لعرض المزيد (حسب الكود الأصلي)
+      function عرضاختيارات(textId, buttonId) {
+          var text = document.getElementById(textId);
+          var button = document.getElementById(buttonId);
+  
+          if (text.style.display === 'none' || text.style.display === '') {
+              text.style.display = 'block';
+              button.innerText = 'إخفاء';
+          } else {
+              text.style.display = 'none';
+              button.innerText = 'معرفة المزيد';
+          }
+      }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <article class="information card" id="p10Card1">
+        <span class="tag">نشط</span>
+        <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+        <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+        <p id="النص1">وصف الصفحة هنا</p>
+        <button id="المفتاح1" class="button" onclick="عرضاختيارات('النص1', 'المفتاح1')">
+            <span>معرفة المزيد</span>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M16.01 11H4v2h12.01v3L20 12ل-3.99-4v3z" fill="currentColor"/>
+            </svg>
+        </button>
+    </article>
+
+    <article class="information card" id="p10Card2">
+        <span class="tag">نشط</span>
+        <h2 class="title">لا تفوت اجتماعاتك الهامة أبدًا</h2>
+        <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+        <p id="النص2">وصف الصفحة هنا</p>
+        <button id="المفتاح2" class="button" onclick="عرضاختيارات('النص2', 'المفتاح2')">
+            <span>معرفة المزيد</span>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M16.01 11H4v2h12.01ف3ل-3.99-4v3z" fill="currentColor"/>
+            </svg>
+        </button>
+    </article>
+
+    <article class="information card" id="p10Card3">
+        <span class="tag">نشط</span>
+        <h2 class="title">علم الأحياء الدقيقة</h2>
+        <p class="info">يتتبع "إليمناتاري" جميع الأحداث لليوم كما جدولتها، فلن تضطر أبدًا للقلق.</p>
+        <p id="النص3">وصف الصفحة هنا</p>
+        <button id="المفتاح3" class="button" onclick="عرضاختيارات('النص3', 'المفتاح3')">
+            <span>معرفة المزيد</span>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path د="M16.01 11H4ف2h12.01ف3ل-3.99-4ف3ز" fill="currentColor"/>
+            </svg>
+        </button>
+    </article>
+
+    <script>
+        const أيام = ['السبت', 'الأحد 15/3/2024', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+        let أياممحددة = [];
+
+        function عرضاختيارات(معرفالنص, معرفالمفتاح) {
+            let html = '<div class="button-container">';
+            أيام.forEach(day => {
+                if (!أياممحددة.includes(day)) {
+                    html += `<button id="${day}-${معرفالنص}" onclick="تحديداختيار('${day}', '${معرفالنص}', '${معرفالمفتاح}')">${day}</button>`;
+                }
+            });
+            html += '</div>';
+
+            Swal.fire({
+                title: 'اختر يوماً',
+                html: html,
+                showConfirmButton: false,
+                focusConfirm: false
+            });
+        }
+
+        function تحديداختيار(day, معرفالنص, معرفالمفتاح) {
+            Swal.fire({
+                title: 'تم اختيار:',
+                text: day,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'تأكيد',
+                cancelButtonText: 'إعادة الاختيار',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'تأكيد',
+                        text: 'هل أنت متأكد أنك تريد المتابعة؟',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'نعم',
+                        cancelButtonText: 'لا',
+                        reverseButtons: true
+                    }).then((confirmation) => {
+                        if (confirmation.isConfirmed) {
+                            Swal.fire('نجاح', 'تم تأكيد اختيارك!', 'success').then(() => {
+                                document.getElementById(معرفالنص).innerText = 'اليوم المختار: ' + day;
+                                document.getElementById(معرفالمفتاح).style.display = 'none';
+                                أياممحددة.push(day);
+                            });
+                        } else {
+                            عرضاختيارات(معرفالنص, معرفالمفتاح);
+                        }
+                    });
+                } else {
+                    عرضاختيارات(معرفالنص, معرفالمفتاح);
+                }
+            });
+        }
+    </script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // Check if user is logged in and userData has p1, p2, p3 values
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    
+    // Function to show message based on parameter
+    function showMessage(param) {
+      if (userData && userData[param] === true) {
+        let messageTitle = `Message for ${param}`;
+        let messageText = `This is the message for ${param}.`;
+
+        Swal.fire({
+          title: messageTitle,
+          text: messageText,
+          icon: 'info',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showCloseButton: false,
+          showCancelButton: true,
+          showDenyButton: false,
+          willClose: () => {
+            // Redirect to index.html after closing the alert
+            window.location.href = '';
+          }
+        });
+      } else {
+        // Optionally handle case where userData[param] is not true
+        console.log(`${param} is not true for the user.`);
+      }
+    }
+
+    // Function to show or hide cards based on userData
+    function updateCardsVisibility() {
+      if (userData) {
+        document.getElementById('p1card').style.display = userData.p1 === true ? 'block' : 'none';
+        document.getElementById('p2card').style.display = userData.p2 === true ? 'block' : 'none';
+        document.getElementById('p3Card').style.display = userData.p3 === true ? 'block' : 'none';
+        document.getElementById('p4Card').style.display = userData.p4 === true ? 'block' : 'none';
+        document.getElementById('p5Card').style.display = userData.p5 === true ? 'block' : 'none';
+        document.getElementById('p6Card').style.display = userData.p6 === true ? 'block' : 'none';
+        document.getElementById('p7Card').style.display = userData.p7 === true ? 'block' : 'none';
+        document.getElementById('p8Card').style.display = userData.p8 === true ? 'block' : 'none';
+        document.getElementById('p9Card').style.display = userData.p9 === true ? 'block' : 'none';
+        document.getElementById('p10Card').style.display = userData.p10 === true ? 'block' : 'none';
+      }
+    }
+
+    // Call updateCardsVisibility initially
+    updateCardsVisibility();
+  </script>
+
+<!-- <script src="update.js"></script> -->
+</body>
+</html>

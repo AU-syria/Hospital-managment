@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحة تسجيل الدخول</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(145deg, #7a4bc3, #9c59f5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .swal2-popup {
+      font-size: 1.6rem !important;
+      border-radius: 1.2rem !important;
+      background-color: #ffffff !important;
+      color: #4a4a4a !important;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+    .swal2-input {
+      font-size: 1.2rem !important;
+      padding: 0.75rem !important;
+      border: 1px solid #ddd !important;
+      border-radius: 0.5rem !important;
+      background-color: #f9f9f9 !important;
+      color: #333 !important;
+      padding-left: 2.5rem !important; /* Space for the icons */
+    }
+    .input-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #9c59f5;
+    }
+    .password-container {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #9c59f5;
+      font-size: 1.2rem;
+    }
+    .swal2-confirm {
+      font-size: 1.2rem !important;
+      padding: 0.75rem 1.5rem !important;
+      border-radius: 0.5rem !important;
+      background-color: #8b50e3 !important;
+      color: #fff !important;
+    }
+    .swal2-cancel {
+      font-size: 1.2rem !important;
+      padding: 0.75rem 1.5rem !important;
+      border-radius: 0.5rem !important;
+      background-color: #d32f2f !important;
+      color: #fff !important;
+    }
+    .swal2-textarea {
+      font-size: 1.2rem !important;
+      padding: 0.75rem !important;
+      border: 1px solid #ddd !important;
+      border-radius: 0.5rem !important;
+      background-color: #f9f9f9 !important;
+      color: #333 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- Fetch Polyfill (if needed) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    let users = [];
+
+    // Fetch user data from JSON file
+    fetch('https://nerd1work.github.io/1/app.json')
+      .then(response => response.json())
+      .then(data => {
+        users = data;
+        showLoginForm();
+      })
+      .catch(error => console.error('Error fetching user data:', error));
+
+    // Function to show login form using SweetAlert2
+    function showLoginForm() {
+      Swal.fire({
+        title: 'تسجيل الدخول',
+        html: `
+          <div style="position: relative;">
+            <i class="fa fa-user input-icon"></i>
+            <input type="text" id="username" class="swal2-input" placeholder="الرقم الجامعي" required>
+          </div>
+          <div class="password-container">
+            <i class="fa fa-lock input-icon"></i>
+            <input type="password" id="password" class="swal2-input" placeholder="كلمة المرور" required>
+            <i class="fa fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+          </div>
+        `,
+        confirmButtonText: 'تسجيل الدخول',
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+          const username = Swal.getPopup().querySelector('#username').value;
+          const password = Swal.getPopup().querySelector('#password').value;
+          if (!username || !password) {
+            Swal.showValidationMessage('الرجاء إدخال الرقم الجامعي وكلمة المرور');
+          }
+          return { username: username, password: password };
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        backdrop: `
+          rgba(0, 0, 0, 0.5)
+        `
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const { username, password } = result.value;
+          loginUser(username, password);
+        }
+      });
+    }
+
+    // Function to toggle password visibility
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      const passwordIcon = document.querySelector('.toggle-password');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordIcon.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        passwordIcon.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    }
+
+    // Function to handle login
+    function loginUser(username, password) {
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        localStorage.setItem('userData', JSON.stringify(user));
+        localStorage.setItem('login', 'true');
+        localStorage.setItem('username', username);
+
+        if (user.block) {
+          Swal.fire({
+            title: 'محظور!',
+            html: `<p>${username} محظور.</p><p>الرجاء التواصل مع المسؤول:</p><textarea id="blockMessage" class="swal2-textarea" placeholder="أدخل الرسالة..."></textarea>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'الاتصال بالمسؤول',
+            cancelButtonText: 'إلغاء',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+              const blockMessage = document.getElementById('blockMessage').value;
+              return new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve();
+                }, 2000);
+              });
+            },
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: 'تم إرسال الرسالة!',
+                text: 'تم إرسال رسالتك إلى المسؤول.',
+                icon: 'success',
+                showConfirmButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false
+              });
+            }
+          });
+        } else if (user.isAdmin) {
+          Swal.fire({
+            title: 'نجاح!',
+            text: 'تسجيل الدخول ناجح. جار التوجيه إلى صفحة المشرف...',
+            icon: 'success',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          });
+
+          setTimeout(() => {
+            window.location.href = 'admin.html';
+          }, 2000);
+        } else if (user.course === 'طب الأسنان') {
+          Swal.fire({
+            title: 'نجاح!',
+            text: 'تسجيل الدخول ناجح. جار التوجيه إلى صفحة طالب طب الأسنان...',
+            icon: 'success',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          });
+
+          setTimeout(() => {
+            window.location.href = 'bar.html';
+          }, 2000);
+        } else {
+          Swal.fire({
+            title: 'عذرًا...',
+            text: 'تم رفض الوصول لهذا المستخدم.',
+            icon: 'error',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          });
+
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 2000);
+        }
+      } else {
+        Swal.fire({
+          title: 'عذرًا...',
+          text: 'اسم المستخدم أو كلمة المرور غير صحيحة!',
+          icon: 'error',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        });
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2000);
+      }
+    }
+
+    // منع وظيفة التقاط الشاشة
+  </script>
+</body>
+</html>

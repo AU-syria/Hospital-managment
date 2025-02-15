@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9f9f9;
+            user-select: none; /* For most modern browsers */
+            -webkit-user-select: none; /* For Chrome, Safari, and Opera */
+            -moz-user-select: none; /* For Firefox */
+            -ms-user-select: none; 
+        }
+        #chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+        }
+        #chat-bar {
+            display: flex;
+            padding: 10px;
+            background-color: #fafafa;
+            border-top: 1px solid white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 20px;
+            outline: none;
+            font-family: 'Cairo', sans-serif;
+
+        }
+        #send-button {
+            padding: 10px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #4133B7;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #send-button:hover {
+            background-color: #6558d3;
+        }
+        .chat-message {
+            margin: 10px 0;
+            padding: 15px;
+            background-color: #6558d3;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgb(252, 248, 248);
+            display: flex;
+            flex-direction: column;
+        }
+        .message-text {
+            margin: 0 0 5px 0;
+            direction: rtl;
+            font-family: 'Cairo', sans-serif;
+            color: white;
+
+
+        }
+        .message-date {
+            align-self: flex-start;
+            font-size: 0.8em;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <!-- Example Message -->
+        <div class="chat-message">
+            <p class="message-text">مرحبًا، هذه رسالة تجريبية!</p>
+            <p class="message-date">2024-06-19 14:30</p>
+        </div>
+    </div>
+    <div id="chat-bar">
+        <input type="text" id="chat-input" placeholder="اكتب رسالة...">
+  <!--- 
+  <button id="send-button">  ---->
+<!----    <img src="https://cdn4.iconfinder.com/data/icons/user-interface-outline-27/24/13.send_cursor_arrow_interface_button-1024.png" alt="إرسال">
+</button> -->
+
+<button id="send-button"><i class="fas fa-paper-plane"></i></button>
+   
+	
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script>
+        document.getElementById('send-button').addEventListener('click', function() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            const arabicRegex = /^[\u0600-\u06FF0-9\s]+$/;
+
+            if (message === '') {
+                swal("خطأ", "الرجاء إدخال رسالة!", "error");
+                return;
+            }
+
+            if (!arabicRegex.test(message)) {
+                swal("خطأ", "الرجاء إدخال نص باللغة العربية أو أرقام فقط!", "error");
+                return;
+            }
+
+            const chatContainer = document.getElementById('chat-container');
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('chat-message');
+
+            const messageText = document.createElement('p');
+            messageText.classList.add('message-text');
+            messageText.textContent = message;
+
+            const messageDate = document.createElement('p');
+            messageDate.classList.add('message-date');
+            const now = new Date();
+            messageDate.textContent = now.toISOString().slice(0, 19).replace('T', ' ');
+
+            newMessage.appendChild(messageText);
+            newMessage.appendChild(messageDate);
+            chatContainer.appendChild(newMessage);
+
+            input.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
+    </script>
+</body>
+</html>
