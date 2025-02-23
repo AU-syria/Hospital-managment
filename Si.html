@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض صورة عريضة مع التمرير</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .image-container {
+            width: 90%;
+            height: 80vh;
+            overflow-x: auto; /* تمكين التمرير الأفقي */
+            overflow-y: hidden; /* إخفاء التمرير العمودي */
+            border: 2px solid #ccc;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;  /* صورة تأخذ العرض الكامل */
+            height: auto; /* الحفاظ على النسب الأصلية للصورة */
+        }
+    </style>
+</head>
+<body>
+
+<div class="image-container">
+    <!-- عرض الصورة باسم "Site.png" من نفس المجلد -->
+    <img src="Site.png" alt="Wide Image Example">
+</div>
+
+</body>
+</html>
+
