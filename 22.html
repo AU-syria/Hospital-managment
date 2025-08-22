@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق الإشعارات PWA</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="تطبيق الإشعارات">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItin2KfZhNil2LTYudin2LHYp9iqINin2YTYr9mB2LkiLAogICJzaG9ydF9uYW1lIjogItmG2KfZitmB2YrZg9mK2LTZhtiyIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjNjM2NmYxIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRJNElpQm9aV2xuYUhROUlqRXlPQ0lnZG1sbGQwSnZlRDBpTUNBd0lERXlPQ0F4TWpnaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5WnkveU1EQXdMM04yWnlJK1BISmxZM1FnZUQwaU5DSWdlVDBpTkNJZ2QybGtkR2c5SWpFeU1DSWdhR1ZwWjJoMFBTSXhNakFpSUhKNFBTSTJJaUJtYVd4c1BTSWpOak0yTm1ZeElpOCtQSFJsZUhRZ2VEZDBPT0M0MklpQjVQU0kyTkNJZ1ptbHNiRDBpSTJabVptWm1aaUlnWm05dWRDMXphWHBsUFNJeU5DSWdabTl1ZEMxbVlXMXBiSGs5SWlkcGJuUmxjaTFCY21GaWFXTXNJR2x0Y0dGamRDZCtMaUErUEM5MFpYaDBQand2YzNablBnPT0iLAogICAgICAic2l6ZXMiOiAiMTI4eDEyOCIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .button {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #34d399;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #f87171;
+        }
+
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #fbbf24;
+        }
+
+        .notification-form {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            text-align: right;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .install-prompt {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            color: #1e40af;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .feature-list {
+            text-align: right;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            list-style: none;
+        }
+
+        .feature-list li::before {
+            content: "✅ ";
+            margin-left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🔔</div>
+        <h1>تطبيق الإشعارات PWA</h1>
+        <p class="subtitle">تطبيق ويب تقدمي مع إشعارات الدفع</p>
+
+        <div id="status"></div>
+
+        <div id="install-section" class="install-prompt" style="display: none;">
+            <h3>📱 تثبيت التطبيق</h3>
+            <p>يمكنك تثبيت هذا التطبيق على جهازك للحصول على تجربة أفضل!</p>
+            <button id="install-btn" class="button">تثبيت التطبيق</button>
+        </div>
+
+        <div class="notification-form">
+            <div class="form-group">
+                <label for="notification-title">عنوان الإشعار:</label>
+                <input type="text" id="notification-title" value="مرحباً!" placeholder="أدخل عنوان الإشعار">
+            </div>
+            <div class="form-group">
+                <label for="notification-body">نص الإشعار:</label>
+                <textarea id="notification-body" placeholder="أدخل محتوى الإشعار">هذا إشعار تجريبي من تطبيق PWA</textarea>
+            </div>
+        </div>
+
+        <button id="request-permission" class="button">طلب صلاحية الإشعارات</button>
+        <button id="send-notification" class="button" disabled>إرسال إشعار</button>
+        <button id="test-service-worker" class="button">اختبار Service Worker</button>
+
+        <ul class="feature-list">
+            <li>إشعارات فورية حتى عند إغلاق التطبيق</li>
+            <li>يعمل بدون إنترنت (Offline)</li>
+            <li>قابل للتثبيت على الجهاز</li>
+            <li>واجهة سريعة ومتجاوبة</li>
+        </ul>
+    </div>
+
+    <script>
+        // تسجيل Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('data:application/javascript;base64,' + btoa(`
+                        const CACHE_NAME = 'pwa-cache-v1';
+                        const urlsToCache = ['/'];
+
+                        // تثبيت Service Worker
+                        self.addEventListener('install', event => {
+                            event.waitUntil(
+                                caches.open(CACHE_NAME)
+                                    .then(cache => cache.addAll(urlsToCache))
+                            );
+                        });
+
+                        // استقبال الطلبات
+                        self.addEventListener('fetch', event => {
+                            event.respondWith(
+                                caches.match(event.request)
+                                    .then(response => {
+                                        return response || fetch(event.request);
+                                    })
+                            );
+                        });
+
+                        // استقبال رسائل الدفع
+                        self.addEventListener('push', event => {
+                            const data = event.data ? event.data.json() : {};
+                            const options = {
+                                body: data.body || 'إشعار جديد من التطبيق!',
+                                vibrate: [100, 50, 100],
+                                data: {
+                                    dateOfArrival: Date.now(),
+                                    primaryKey: '2'
+                                },
+                                tag: 'pwa-push-notification',
+                                silent: false
+                            };
+
+                            event.waitUntil(
+                                self.registration.showNotification(data.title || 'تطبيق الإشعارات PWA', options)
+                            );
+                        });
+
+                        // معالجة النقر على الإشعار
+                        self.addEventListener('notificationclick', event => {
+                            event.notification.close();
+                            
+                            if (event.action === 'explore') {
+                                clients.openWindow('/');
+                            }
+                        });
+                    `));
+                    
+                    showStatus('تم تسجيل Service Worker بنجاح!', 'success');
+                } catch (error) {
+                    showStatus('فشل في تسجيل Service Worker', 'error');
+                    console.error('Service Worker registration failed:', error);
+                }
+            });
+        }
+
+        // عناصر DOM
+        const statusDiv = document.getElementById('status');
+        const requestPermissionBtn = document.getElementById('request-permission');
+        const sendNotificationBtn = document.getElementById('send-notification');
+        const testServiceWorkerBtn = document.getElementById('test-service-worker');
+        const notificationTitle = document.getElementById('notification-title');
+        const notificationBody = document.getElementById('notification-body');
+        const installSection = document.getElementById('install-section');
+        const installBtn = document.getElementById('install-btn');
+
+        // متغيرات PWA
+        let deferredPrompt;
+
+        // إظهار الرسائل
+        function showStatus(message, type = 'success') {
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // فحص حالة الإشعارات
+        function checkNotificationPermission() {
+            if (!("Notification" in window)) {
+                showStatus('المتصفح لا يدعم الإشعارات', 'error');
+                return false;
+            }
+
+            if (Notification.permission === 'granted') {
+                sendNotificationBtn.disabled = false;
+                showStatus('صلاحية الإشعارات ممنوحة ✅', 'success');
+                return true;
+            } else if (Notification.permission === 'denied') {
+                showStatus('صلاحية الإشعارات مرفوضة ❌', 'error');
+                return false;
+            } else {
+                showStatus('صلاحية الإشعارات غير محددة، الرجاء الطلب', 'warning');
+                return false;
+            }
+        }
+
+        // طلب صلاحية الإشعارات
+        async function requestNotificationPermission() {
+            if (!("Notification" in window)) {
+                showStatus('المتصفح لا يدعم الإشعارات', 'error');
+                return;
+            }
+
+            try {
+                const permission = await Notification.requestPermission();
+                
+                if (permission === 'granted') {
+                    sendNotificationBtn.disabled = false;
+                    showStatus('تم منح صلاحية الإشعارات! 🎉', 'success');
+                } else {
+                    showStatus('تم رفض صلاحية الإشعارات', 'error');
+                }
+            } catch (error) {
+                showStatus('حدث خطأ في طلب الصلاحية', 'error');
+                console.error('Permission request error:', error);
+            }
+        }
+
+        // إرسال إشعار عبر Service Worker
+        async function sendNotification() {
+            console.log('محاولة إرسال إشعار...');
+            
+            // فحص دعم الإشعارات
+            if (!("Notification" in window)) {
+                showStatus('المتصفح لا يدعم الإشعارات', 'error');
+                return;
+            }
+
+            // فحص الصلاحية
+            console.log('حالة الصلاحية:', Notification.permission);
+            
+            if (Notification.permission !== 'granted') {
+                showStatus('الرجاء منح صلاحية الإشعارات أولاً', 'error');
+                return;
+            }
+
+            try {
+                const title = notificationTitle.value || 'إشعار تجريبي';
+                const body = notificationBody.value || 'هذا إشعار تجريبي من التطبيق';
+
+                console.log('إنشاء إشعار:', { title, body });
+
+                // التحقق من وجود Service Worker
+                if ('serviceWorker' in navigator) {
+                    const registration = await navigator.serviceWorker.ready;
+                    
+                    if (registration) {
+                        // استخدام Service Worker لإرسال الإشعار
+                        await registration.showNotification(title, {
+                            body: body,
+                            vibrate: [200, 100, 200],
+                            timestamp: Date.now(),
+                            silent: false,
+                            tag: 'pwa-notification',
+                            data: { url: window.location.href }
+                        });
+                        
+                        console.log('تم إنشاء الإشعار عبر Service Worker');
+                        showStatus('تم إرسال الإشعار بنجاح! 📱', 'success');
+                    } else {
+                        throw new Error('Service Worker غير جاهز');
+                    }
+                } else {
+                    // إذا لم يكن Service Worker متاحاً، استخدم الطريقة التقليدية
+                    const notification = new Notification(title, {
+                        body: body,
+                        vibrate: [200, 100, 200],
+                        silent: false,
+                        tag: 'pwa-notification'
+                    });
+
+                    notification.onclick = function() {
+                        console.log('تم النقر على الإشعار');
+                        window.focus();
+                        this.close();
+                    };
+
+                    console.log('تم إنشاء الإشعار بالطريقة التقليدية');
+                    showStatus('تم إرسال الإشعار! 📱', 'success');
+                }
+
+            } catch (error) {
+                console.error('خطأ في إنشاء الإشعار:', error);
+                showStatus(`خطأ: ${error.message}`, 'error');
+                
+                // محاولة البديل إذا فشل Service Worker
+                try {
+                    const title = notificationTitle.value || 'إشعار تجريبي';
+                    const body = notificationBody.value || 'هذا إشعار تجريبي من التطبيق';
+                    
+                    const notification = new Notification(title, {
+                        body: body,
+                        silent: false
+                    });
+
+                    notification.onclick = () => {
+                        window.focus();
+                        notification.close();
+                    };
+
+                    showStatus('تم إرسال الإشعار بالطريقة البديلة! 📱', 'success');
+                } catch (fallbackError) {
+                    console.error('فشل البديل أيضاً:', fallbackError);
+                    showStatus('فشل في إرسال الإشعار تماماً', 'error');
+                }
+            }
+        }
+
+        // اختبار Service Worker
+        async function testServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.ready;
+                    if (registration) {
+                        showStatus('Service Worker يعمل بشكل صحيح! ⚙️', 'success');
+                        
+                        // إرسال رسالة للـ Service Worker
+                        if (registration.active) {
+                            registration.active.postMessage('اختبار من الصفحة الرئيسية');
+                        }
+                    }
+                } catch (error) {
+                    showStatus('خطأ في Service Worker', 'error');
+                    console.error('Service Worker test failed:', error);
+                }
+            } else {
+                showStatus('Service Worker غير مدعوم في هذا المتصفح', 'error');
+            }
+        }
+
+        // معالجة تثبيت PWA
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installSection.style.display = 'block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                showStatus('تم تثبيت التطبيق بنجاح! 🎉', 'success');
+            } else {
+                showStatus('تم إلغاء تثبيت التطبيق', 'warning');
+            }
+            
+            deferredPrompt = null;
+            installSection.style.display = 'none';
+        });
+
+        // أحداث الأزرار
+        requestPermissionBtn.addEventListener('click', requestNotificationPermission);
+        sendNotificationBtn.addEventListener('click', sendNotification);
+        testServiceWorkerBtn.addEventListener('click', testServiceWorker);
+
+        // فحص الصلاحيات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            checkNotificationPermission();
+            showStatus('مرحباً! تطبيق PWA جاهز للاستخدام 🚀', 'success');
+        });
+
+        // إضافة بعض التفاعلات الممتعة
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+  </html>
